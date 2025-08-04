@@ -48,7 +48,9 @@ function App() {
   ]);
 
   onAuthStateChanged(auth, (user) => {
-    dispatch(login(user));
+    if (user?.displayName && user?.photoURL) {
+      dispatch(login(user));
+    }
     dispatch(authReady());
   });
 
