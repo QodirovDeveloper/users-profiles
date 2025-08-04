@@ -1,34 +1,43 @@
+import ThemeMode from "./ThemeMode";
+import Menu from "./Menu";
+import Search from "./Search";
+import LastSeen from "./LastSeen";
 import { useSelector } from "react-redux";
-import { useLogout } from "../hooks/useLogout";
-import { Link } from "react-router-dom";
-import ThemeMode from './ThemeMode'
 
-function Navbar() {
-  const { isPending, logout } = useLogout();
+function Navbar({ selectedUser }) {
   const { user } = useSelector((state) => state.user);
-
   return (
-    <nav className="flex justify-between items-center px-4 py-3 bg-gray-900 text-white">
-      <Link to="/" className="text-xl font-bold">
-        MyApp
-      </Link>
+    <div className="flex justify-between items-center px-4  ">
+      <div className="flex items-center gap-3">
+        <Menu />
+        <Search />
+      <div className="flex items-center justify-center gap-3 m-1">
+        <img
+          src={selectedUser ? selectedUser?.photoURL : user?.photoURL}
+          alt={selectedUser ? selectedUser?.displayName : user?.displayName}
+          className="w-10 rounded-full"
+        />
+        <div>
+          {selectedUser && (
+            <div>
+              <p>{selectedUser.displayName}</p>
+              <p>
+                {selectedUser.online ? (
+                  "Online"
+                ) : (
+                  <LastSeen timestamp={selectedUser.lastSeen} />
+                )}
+              </p>
+            </div>
+          )}
+        </div>
+      </div>
+      </div>
 
       <div className="flex items-center gap-4">
         <ThemeMode />
-         {user?.displayName}
-        <img src={user?.photoURL} alt="user name" width={60} className="rounded-full" />
-        {!isPending && (
-          <button onClick={logout} className="btn btn-ghost">
-            Logout
-          </button>
-        )}
-        {isPending && (
-          <button className="btn btn-ghost disabled" disabled>
-            Logout
-          </button>
-        )}
       </div>
-    </nav>
+    </div>
   );
 }
 

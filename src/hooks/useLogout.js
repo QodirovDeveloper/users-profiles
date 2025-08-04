@@ -6,6 +6,7 @@ import { signOut } from "firebase/auth";
 import { logOut } from "../app/features/userSlice";
 import { db } from "../firebase/config";
 import { doc, updateDoc } from "firebase/firestore";
+import { serverTimestamp } from "firebase/firestore";
 
 export const useLogout = () => {
   const [isPending, setIsPending] = useState(false);
@@ -17,6 +18,7 @@ export const useLogout = () => {
       const user = doc(db, "users", auth.currentUser.uid);
       await updateDoc(user, {
         online: false,
+        lastSeen: serverTimestamp(),
       });
       await signOut(auth);
       dispatch(logOut());

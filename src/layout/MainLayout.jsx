@@ -1,12 +1,12 @@
 import { Outlet } from "react-router-dom";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-function MainLayout() {
+function MainLayout({ selectedUser, setSelectedUser }) {
   return (
     <>
-      <Navbar />
+      <Navbar selectedUser={selectedUser} />
       <main>
-        <Outlet />
+        <Outlet context={{ setSelectedUser }} />
       </main>
       <Footer />
     </>

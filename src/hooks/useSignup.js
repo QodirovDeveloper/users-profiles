@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth, db} from "../firebase/config";
+import { auth, db } from "../firebase/config";
 import toast from "react-hot-toast";
 import { login } from "../app/features/userSlice";
 import { doc, setDoc } from "firebase/firestore";
-
 
 export const useSignup = () => {
   const [isPending, setIsPending] = useState(false);
@@ -20,15 +19,15 @@ export const useSignup = () => {
       }
       await updateProfile(auth.currentUser, {
         displayName,
-        photoURL: "https://api.dicebear.com/9.x/initials/svg?seed=" + displayName,
+        photoURL:
+          "https://api.dicebear.com/9.x/initials/svg?seed=" + displayName,
       });
 
       await setDoc(doc(db, "users", auth.currentUser.uid), {
         online: true,
         displayName: auth.currentUser.displayName,
         photoURL: auth.currentUser.photoURL,
-
-      })
+      });
 
       dispatch(login(req.user));
       toast.success(`Welcome, ${auth.currentUser.displayName}`);

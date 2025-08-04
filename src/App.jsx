@@ -10,8 +10,12 @@ import MainLayout from "./layout/MainLayout";
 import { login, authReady } from "./app/features/userSlice";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase/config";
+import Navbar from "./components/Navbar";
+import { useState } from "react";
 
 function App() {
+  const [selectedUser, setSelectedUser] = useState(null);
+
   const dispatch = useDispatch();
   const { user, isAuthReady } = useSelector((store) => store.user);
   const routes = createBrowserRouter([
@@ -19,13 +23,15 @@ function App() {
       path: "/",
       element: (
         <ProtectedRoutes user={user}>
-          <MainLayout />
+          <MainLayout
+            selectedUser={selectedUser}
+            setSelectedUser={setSelectedUser} />
         </ProtectedRoutes>
       ),
       children: [
         {
           index: true,
-          element: <Home />,
+          element: <Home setSelectedUser={setSelectedUser} />,
         },
         {
           path: "/profile",
