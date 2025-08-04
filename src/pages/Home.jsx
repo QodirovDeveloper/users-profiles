@@ -15,14 +15,14 @@ function Home() {
               {user.online && (
                 <div className="avatar avatar-online">
                   <div className="w-24 rounded-full">
-                    <img src="https://img.daisyui.com/images/profile/demo/gordon@192.webp" />
+                    <img src={user?.photoURL} alt="user name" />
                   </div>
                 </div>
               )}
               {!user.online && (
                 <div className="avatar avatar-offline">
                   <div className="w-24 rounded-full">
-                    <img src="https://img.daisyui.com/images/profile/demo/idiotsandwich@192.webp" />
+                    <img src={user?.photoURL} alt="user name" />
                   </div>
                 </div>
               )}

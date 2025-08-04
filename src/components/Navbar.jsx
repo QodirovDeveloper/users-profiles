@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { useLogout } from "../hooks/useLogout";
 import { Link } from "react-router-dom";
+import ThemeMode from './ThemeMode'
 
 function Navbar() {
   const { isPending, logout } = useLogout();
@@ -13,7 +14,8 @@ function Navbar() {
       </Link>
 
       <div className="flex items-center gap-4">
-        Navbar - {user?.displayName}
+        <ThemeMode />
+         {user?.displayName}
         <img src={user?.photoURL} alt="user name" width={60} className="rounded-full" />
         {!isPending && (
           <button onClick={logout} className="btn btn-ghost">
