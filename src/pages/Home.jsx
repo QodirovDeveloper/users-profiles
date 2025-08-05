@@ -20,18 +20,24 @@ function Home({ selectedUser, setSelectedUser }) {
               onClick={() => setSelectedUser(user)}
               className="cursor-pointer"
             >
-              <ul className="menu bg-base-200 w-60 rounded-box p-2">
+              <ul className="menu bg-base-200 sm:w-70  rounded-box p-2">
                 <li>
-                  <a className={`flex items-center gap-3 ${isSelected ? "bg-primary text-white rounded-md" : ""}`}>
-                    <div className={`avatar ${user.online ? "avatar-online" : "avatar-offline"}`}>
-                      <div className="w-14 rounded-full">
+                  <a
+                    className={`flex items-center gap-3 ${
+                      isSelected ? " rounded-md" : ""
+                    }`}
+                  >
+                    <div
+                      className={`avatar ${
+                        user.online ? "avatar-online" : "avatar-offline"
+                      }`}
+                    >
+                      <div className="sm:w-14 max-sm:w-11 rounded-full">
                         <img src={user?.photoURL} alt={user?.displayName} />
                       </div>
                     </div>
-                    <div>
+                    <div className="sm:flex  max-sm:hidden inline-block">
                       <p className="font-semibold">{user.displayName}</p>
-                      <p className="text-sm text-gray-500">
-                      </p>
                     </div>
                   </a>
                 </li>
