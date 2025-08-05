@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import { useCollection } from "../hooks/useCollection";
-import LastSeen from "../components/LastSeen";
+import bg from '../../public/bg.png';
 
 function Home({ selectedUser, setSelectedUser }) {
   const { data: users } = useCollection("users");
@@ -10,7 +10,7 @@ function Home({ selectedUser, setSelectedUser }) {
   }
 
   return (
-    <div className="bg-[url('./bg.png')] bg-center bg-cover bg-no-repeat h-screen">
+    <div style={{background:`url(${bg})`}} className=" bg-center bg-cover bg-no-repeat h-screen">
       {users.map((user) => {
         const isSelected = selectedUser?.id === user.id;
 
