@@ -10,39 +10,33 @@ function Home({ selectedUser, setSelectedUser }) {
   }
 
   return (
-    <div>
+    <div className="bg-[url(bg.webp)] bg-center bg-cover bg-no-repeat h-screen">
       {users.map((user) => {
         const isSelected = selectedUser?.id === user.id;
 
         return (
           <Fragment key={user.id}>
-            <div
+            <ul
+              className="menu bg-base-200 sm:w-70 p-2 cursor-pointer"
               onClick={() => setSelectedUser(user)}
-              className="cursor-pointer"
             >
-              <ul className="menu bg-base-200 sm:w-70  rounded-box p-2">
-                <li>
-                  <a
-                    className={`flex items-center gap-3 ${
-                      isSelected ? " rounded-md" : ""
+              <li>
+                <a className="flex items-center gap-3">
+                  <div
+                    className={`avatar ${
+                      user.online ? "avatar-online" : "avatar-offline"
                     }`}
                   >
-                    <div
-                      className={`avatar ${
-                        user.online ? "avatar-online" : "avatar-offline"
-                      }`}
-                    >
-                      <div className="sm:w-14 max-sm:w-11 rounded-full">
-                        <img src={user?.photoURL} alt={user?.displayName} />
-                      </div>
+                    <div className="sm:w-14 max-sm:w-11 rounded-full">
+                      <img src={user?.photoURL} alt={user?.displayName} />
                     </div>
-                    <div className="sm:flex  max-sm:hidden inline-block">
-                      <p className="font-semibold">{user.displayName}</p>
-                    </div>
-                  </a>
-                </li>
-              </ul>
-            </div>
+                  </div>
+                  <div className="sm:flex  max-sm:hidden inline-block">
+                    <p className="font-semibold">{user.displayName}</p>
+                  </div>
+                </a>
+              </li>
+            </ul>
           </Fragment>
         );
       })}
