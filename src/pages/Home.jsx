@@ -10,7 +10,7 @@ function Home({ selectedUser, setSelectedUser }) {
   }
 
   return (
-    <div className="bg-[url?('./bg.png')] bg-center bg-cover bg-no-repeat h-screen">
+    <div className="bg-[url('./bg.png')] bg-center bg-cover bg-no-repeat h-screen">
       {users.map((user) => {
         const isSelected = selectedUser?.id === user.id;
 
